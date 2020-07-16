@@ -1,0 +1,71 @@
+### For Google auth server
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: 914179703139-d98cefqrh9m1bhj6ief0td2g87bj19et.apps.googleusercontent.com
+#            client-secret: rmFjSQO7eUESkhWIvg4pCc35
+            
+### For Our own auth server
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 914179703139-d98cefqrh9m1bhj6ief0td2g87bj19et.apps.googleusercontent.com
+            client-secret: rmFjSQO7eUESkhWIvg4pCc35
+            scope: openid,profile,email
+            client-name: SivaGoogle
+          way2learnclient:
+            client-id: microclient
+            client-secret: secret
+            client-name: Way2learn
+            scope: user_info,read
+            redirect-uri: https://localhost:8443/myapp/login/oauth2/code/way2learnappclient
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            provider: myauthserver-provider
+        provider:
+            myauthserver-provider:
+              token-uri: http://localhost:8081/auth/oauth/token
+              authorization-uri: http://localhost:8081/auth/oauth/authorize
+              user-info-uri: http://localhost:8081/auth/userinfo
+              user-name-attribute: username
+      
+
+
+            
+  # spring.h2.console ....        
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  jpa:    
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+    
+server:
+  port: 8443  
+  servlet:
+    context-path: /myapp
+    session:
+      cookie:
+        path: /myapp
+  ssl:
+    key-store-password: tomcat
+    key-store: classpath:mykeystore.p12
+    key-store-type: PKCS12
+    key-alias: tomcat
+
+
+          
+
+

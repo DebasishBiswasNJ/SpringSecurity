@@ -1,0 +1,14 @@
+server:
+  port: 8084
+  
+security:
+  oauth2:
+    client:
+      clientId: microclient
+      clientSecret: secret
+    resource:
+      jwt:
+        key-uri: http://localhost:8081/auth/oauth/token_key
+#      tokenInfoUri: http://localhost:8081/auth/oauth/check_token
+#      user-info-uri:  http://localhost:8081/auth/userinfo     
+  
